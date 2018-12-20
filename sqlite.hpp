@@ -5,6 +5,7 @@
 #include <vector>
 #include <sqlite3.h>
 #include "utility.hpp"
+#include "limits.h"
 
 #ifndef ORM_SQLITE_HPP
 #define ORM_SQLITE_HPP
