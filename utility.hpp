@@ -169,10 +169,16 @@ namespace ormpp{
         constexpr auto SIZE = iguana::get_value<T>();
         constexpr auto name = iguana::get_name<T>();
         append(sql, name.data());
+#ifndef _MSC_VER
+        if constexpr (sizeof...(Args) > 0) {
+            append(sql, " where ", std::forward<Args>(where_conditon)...);
+        }
+#else
 		//if constexpr (sizeof...(Args) > 0) {
 			//if (!is_empty(std::forward<Args>(where_conditon)...))//fix for vs2017
 				append(sql, " where ", std::forward<Args>(where_conditon)...);
 		//}        
+#endif
 
         return sql;
     }
